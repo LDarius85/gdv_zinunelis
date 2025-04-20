@@ -12,6 +12,7 @@ body {
   color: white;
   padding: 1em;
   overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
 }
 .sidebar h1 {
   font-size: 1.2em;
@@ -34,4 +35,34 @@ body {
 }
 section {
   margin-bottom: 2em;
+}
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  font-size: 2em;
+  background: none;
+  color: #333;
+  border: none;
+}
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    z-index: 999;
+  }
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  .menu-toggle {
+    display: block;
+  }
 }
