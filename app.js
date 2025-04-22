@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.7";
+const APP_VERSION = "v1.8";
 
 // Atnaujinta DOMContentLoaded – viskas vienoje vietoje
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,7 +27,10 @@ function filterSections() {
 }
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  const content = document.querySelector(".content");
+  if (content) {
+    content.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 
 // Atnaujinimo pranešimas (su newWorker globaliai)
