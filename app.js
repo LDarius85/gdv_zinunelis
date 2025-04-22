@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.7";
+const APP_VERSION = "v2.8";
 
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
@@ -48,16 +48,17 @@ function filterSections() {
 
 // 🔄 Service Worker – atnaujinimų aptikimas
 let newWorker;
+let serviceWorkerRegistration;
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").then(reg => {
-    // Jeigu jau yra laukiantis SW
+    serviceWorkerRegistration = reg;
+
     if (reg.waiting) {
       newWorker = reg.waiting;
       showUpdateNotification();
     }
 
-    // Jei atsirado naujas
     reg.addEventListener("updatefound", () => {
       newWorker = reg.installing;
       newWorker.addEventListener("statechange", () => {
@@ -66,17 +67,18 @@ if ("serviceWorker" in navigator) {
         }
       });
     });
-  });
 
-   // 👇 Versijos spaudimas
-  const vElement = document.querySelector(".version");
-  if (vElement) {
-    vElement.style.cursor = "pointer";
-    vElement.title = "Patikrinti ar yra nauja versija";
-    vElement.addEventListener("click", () => {
-      reg.update(); // priverstinai tikrina naują versiją
-    });
-  }
+    // 👇 Versijos numerio paspaudimas
+    const vElement = document.querySelector(".version");
+    if (vElement) {
+      vElement.style.cursor = "pointer";
+      vElement.title = "Patikrinti ar yra nauja versija";
+      vElement.addEventListener("click", () => {
+        console.log("Versija paspausta. Tikrinam atnaujinimus...");
+        serviceWorkerRegistration.update();
+      });
+    }
+  });
 
   // Kai naujas SW perima kontrolę – perkraunam puslapį
   navigator.serviceWorker.addEventListener("controllerchange", () => {
