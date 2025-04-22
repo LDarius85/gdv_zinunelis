@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0";
+const APP_VERSION = "v2.1";
 
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
@@ -8,13 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(".content");
 
   if (backBtn && content) {
+    // Tikrinam scroll poziciją iškart po užkrovimo
+    backBtn.style.display = content.scrollTop > 100 ? "flex" : "none";
+
     // Scroll listeneris
     content.addEventListener("scroll", () => {
-      if (content.scrollTop > 100) {
-        backBtn.style.display = "flex";
-      } else {
-        backBtn.style.display = "none";
-      }
+      backBtn.style.display = content.scrollTop > 100 ? "flex" : "none";
     });
 
     // Scroll to top veiksmas
