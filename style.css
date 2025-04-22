@@ -89,6 +89,8 @@ section {
   z-index: 1000;
 }
 #backToTop {
+  display: none;
+  display: flex;
   position: fixed;
   bottom: 20px;
   right: 20px;
