@@ -1,3 +1,5 @@
+const APP_VERSION = "v1.2";
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("sw.js").then(
