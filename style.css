@@ -39,7 +39,7 @@ section {
 .menu-toggle {
   display: none;
   position: fixed;
-  top: 10px;
+  top: 5px;
   left: 10px;
   cursor: pointer;
   z-index: 1000;
