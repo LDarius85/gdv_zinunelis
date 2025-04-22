@@ -200,5 +200,9 @@ section {
 }
 
 .content {
-  padding-top: 70px; /* tiek, kiek .topbar aukštis + tarpas */
+  padding-top: 45px; 
+}
+
+section {
+  scroll-margin-top: 45px;
 }
