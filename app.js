@@ -43,3 +43,9 @@ if ('serviceWorker' in navigator) {
     };
   });
 }
+
+// Įrašom versiją į .version div
+document.addEventListener("DOMContentLoaded", () => {
+  const v = document.querySelector(".version");
+  if (v) v.textContent = APP_VERSION;
+});
