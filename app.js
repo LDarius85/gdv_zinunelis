@@ -36,7 +36,11 @@ if ('serviceWorker' in navigator) {
       newWorker.onstatechange = () => {
         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
           const toast = document.createElement('div');
-          toast.innerHTML = '<div style="position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:1em;border-radius:6px;z-index:1001;">Yra atnaujinimas – <button onclick="location.reload()">Atnaujinti dabar</button></div>';
+          toast.innerHTML = '<div style="position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:1em;border-radius:6px;z-index:1001;">Yra atnaujinimas – <button id="reloadBtn">Atnaujinti dabar</button></div>';
+
+            document.getElementById("reloadBtn").onclick = () => {
+              newWorker.postMessage({ action: "skipWaiting" });
+            };
           document.body.appendChild(toast);
         }
       };
