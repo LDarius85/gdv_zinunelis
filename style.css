@@ -120,6 +120,7 @@ section {
 }
 
 #clearSearch {
+  background: red; /* LAIKINAI tik debugui */
   position: absolute;
   right: 0.3em;
   top: 50%;
