@@ -1,4 +1,4 @@
-const APP_VERSION = "1.1";
+const APP_VERSION = "1.2";
 
 // Reloadinam puslapį kai naujas SW perima kontrolę (turi būti prieš register!)
 navigator.serviceWorker.addEventListener("controllerchange", () => {
@@ -46,11 +46,43 @@ function toggleMenu() {
 function closeMenu() {
   document.getElementById("sidebar").classList.remove("active");
 }
+//Paieškos funkcija su paryškintais žodžiais
 function filterSections() {
-  const query = document.getElementById("searchBox").value.toLowerCase();
-  document.querySelectorAll("main section").forEach(section => {
-    const text = section.innerText.toLowerCase();
-    section.style.display = text.includes(query) ? "" : "none";
+  const input = document.getElementById("searchBox");
+  const filter = input.value.toLowerCase();
+  const sections = document.querySelectorAll("section");
+
+  sections.forEach(section => {
+    const title = section.querySelector("h2, h3, h4, h5, h6"); // priklausomai kokius naudoji
+    const text = section.textContent.toLowerCase();
+    const shouldShow = text.includes(filter);
+
+    // Rodyti / slėpti skiltį
+    section.style.display = shouldShow ? "block" : "none";
+
+    // Išvalyti senus highlight'us
+    const highlights = section.querySelectorAll("span.highlight");
+    highlights.forEach(h => {
+      const parent = h.parentNode;
+      parent.replaceChild(document.createTextNode(h.textContent), h);
+      parent.normalize(); // sulieja tekstinius mazgus atgal
+    });
+
+    // Jei filtruojama ir skiltis rodoma – paryškinam
+    if (filter && shouldShow) {
+      const regex = new RegExp(`(${filter})`, "gi");
+
+      section.childNodes.forEach(node => {
+        if (node.nodeType === 3) { // text node
+          const match = node.textContent.match(regex);
+          if (match) {
+            const span = document.createElement("span");
+            span.innerHTML = node.textContent.replace(regex, '<span class="highlight">$1</span>');
+            node.replaceWith(span);
+          }
+        }
+      });
+    }
   });
 }
 
