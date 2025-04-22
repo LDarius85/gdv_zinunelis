@@ -1,4 +1,4 @@
-const CACHE_NAME = "v1.4";
+const CACHE_NAME = "v1.5";
 const ASSETS = [
   "index.html",
   "style.css",
@@ -27,7 +27,8 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("message", event => {
-  if (event.data.action === "skipWaiting") {
+  if (event.data && event.data.action === "skipWaiting") {
+    console.log("[SW] Gauta skipWaiting komanda");
     self.skipWaiting();
   }
 });
