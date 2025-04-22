@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.5";
+const APP_VERSION = "v2.6";
 
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
@@ -23,27 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function toggleMenu() {
-  document.getElementById("sidebar").classList.toggle("active");
-}
-function closeMenu() {
-  document.getElementById("sidebar").classList.remove("active");
-}
-
-function filterSections() {
-  const query = document.getElementById("searchBox").value.toLowerCase();
-  document.querySelectorAll("main section").forEach(section => {
-    const text = section.innerText.toLowerCase();
-    section.style.display = text.includes(query) ? "" : "none";
-  });
-}
-
-//function scrollToTop() {
-//  const content = document.querySelector(".content");
-//  if (content) {
-//    content.scrollTo({ top: 0, behavior: "smooth" });
-//  }
-//}
 function scrollToTop() {
   const content = document.querySelector(".content");
   if (content && content.scrollTop > 0) {
@@ -53,22 +32,49 @@ function scrollToTop() {
   }
 }
 
-// Atnaujinimo pranešimas (su newWorker globaliai)
+function toggleMenu() {
+  document.getElementById("sidebar").classList.toggle("active");
+}
+function closeMenu() {
+  document.getElementById("sidebar").classList.remove("active");
+}
+function filterSections() {
+  const query = document.getElementById("searchBox").value.toLowerCase();
+  document.querySelectorAll("main section").forEach(section => {
+    const text = section.innerText.toLowerCase();
+    section.style.display = text.includes(query) ? "" : "none";
+  });
+}
+
+// 🔄 Service Worker – atnaujinimų aptikimas
 let newWorker;
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").then(reg => {
-    reg.onupdatefound = () => {
+    // Jeigu jau yra laukiantis SW
+    if (reg.waiting) {
+      newWorker = reg.waiting;
+      showUpdateNotification();
+    }
+
+    // Jei atsirado naujas
+    reg.addEventListener("updatefound", () => {
       newWorker = reg.installing;
-      newWorker.onstatechange = () => {
+      newWorker.addEventListener("statechange", () => {
         if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
           showUpdateNotification();
         }
-      };
-    };
+      });
+    });
+  });
+
+  // Kai naujas SW perima kontrolę – perkraunam puslapį
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    window.location.reload();
   });
 }
 
+// 🧾 Parodyti pranešimą apie atnaujinimą
 function showUpdateNotification() {
   const toast = document.createElement("div");
   toast.id = "updateNotification";
@@ -81,11 +87,6 @@ function showUpdateNotification() {
   document.getElementById("reloadBtn").onclick = () => {
     if (newWorker) {
       newWorker.postMessage({ action: "skipWaiting" });
-
-      // Perkraunam, kai naujas SW perima kontrolę
-      navigator.serviceWorker.addEventListener("controllerchange", () => {
-        window.location.reload();
-      });
     }
   };
 }
