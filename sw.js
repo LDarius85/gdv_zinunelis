@@ -1,4 +1,4 @@
-const CACHE_NAME = "zinynelis-v7";
+const CACHE_NAME = "zinynelis-v8";
 const ASSETS = [
   "index.html",
   "style.css",
