@@ -151,3 +151,40 @@ section {
   from { bottom: -100px; opacity: 0; }
   to { bottom: 20px; opacity: 1; }
 }
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #ffc000;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.topbar .left {
+  flex: 0 0 auto;
+}
+
+.topbar .center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+#searchBox {
+  width: 100%;
+  max-width: 300px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.content {
+  padding-top: 70px; /* tiek, kiek .topbar aukštis + tarpas */
+}
