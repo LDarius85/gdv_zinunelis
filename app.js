@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.8";
+const APP_VERSION = "v1.9";
 
 // Atnaujinta DOMContentLoaded – viskas vienoje vietoje
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,10 +26,18 @@ function filterSections() {
   });
 }
 
+//function scrollToTop() {
+//  const content = document.querySelector(".content");
+//  if (content) {
+//    content.scrollTo({ top: 0, behavior: "smooth" });
+//  }
+//}
 function scrollToTop() {
   const content = document.querySelector(".content");
-  if (content) {
+  if (content && content.scrollTop > 0) {
     content.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 
