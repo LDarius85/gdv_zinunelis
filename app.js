@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3";
+const APP_VERSION = "v1.4";
 
 // Užrašom versiją į HTML
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,6 +24,15 @@ function filterSections() {
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const v = document.querySelector(".version");
+  if (v) v.textContent = APP_VERSION;
+
+  const backBtn = document.getElementById("backToTop");
+  if (backBtn) {
+    backBtn.addEventListener("click", scrollToTop);
+  }
+});
 
 // Atnaujinimo pranešimas (su newWorker globaliai)
 let newWorker;
