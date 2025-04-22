@@ -38,6 +38,7 @@ section {
 }
 .menu-toggle {
   display: none;
+  outline: 1px solid red;
   position: fixed;
   top: 10px;
   left: 10px;
