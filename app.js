@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.8";
+const APP_VERSION = "v2.9";
 
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
@@ -76,6 +76,13 @@ if ("serviceWorker" in navigator) {
       vElement.addEventListener("click", () => {
         console.log("Versija paspausta. Tikrinam atnaujinimus...");
         serviceWorkerRegistration.update();
+
+        // Po trumpo palaukimo tikrinam ar nėra atnaujinimo
+        setTimeout(() => {
+          if (!serviceWorkerRegistration.waiting) {
+            showNoUpdateNotification();
+          }
+        }, 1500); // šiek tiek palaukiam, kol updatefound suveiktų jei reikia
       });
     }
   });
@@ -101,4 +108,17 @@ function showUpdateNotification() {
       newWorker.postMessage({ action: "skipWaiting" });
     }
   };
+}
+
+function showNoUpdateNotification() {
+  const toast = document.createElement("div");
+  toast.id = "updateNotification";
+  toast.innerHTML = `
+    <span>Naudojate naujausią versiją 👌</span>
+  `;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 3000); // automatiškai dingsta po 3s
 }
