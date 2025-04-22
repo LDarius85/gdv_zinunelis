@@ -120,16 +120,15 @@ section {
 }
 
 #clearSearch {
-  background: red; /* LAIKINAI tik debugui */
-  position: absolute;
-  right: 0.3em;
-  top: 50%;
-  transform: translateY(-50%);
+  position: fixed;
+  top: 6px;
+  left: calc(50px + 250px - 1.8em); /* 50px kairėje kaip input + laukelio plotis */
   background: transparent;
   border: none;
   font-size: 1.2em;
   cursor: pointer;
   display: none;
+  z-index: 1001;
 }
 
 #backToTop {
