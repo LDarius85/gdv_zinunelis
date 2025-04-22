@@ -35,13 +35,17 @@ if ('serviceWorker' in navigator) {
       const newWorker = reg.installing;
       newWorker.onstatechange = () => {
         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-          const toast = document.createElement('div');
-          toast.innerHTML = '<div style="position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:1em;border-radius:6px;z-index:1001;">Yra atnaujinimas – <button id="reloadBtn">Atnaujinti dabar</button></div>';
-
-            document.getElementById("reloadBtn").onclick = () => {
-              newWorker.postMessage({ action: "skipWaiting" });
-            };
+          const toast = document.createElement("div");
+          toast.id = "updateNotification";
+          toast.innerHTML = `
+            <span>Yra nauja versija</span>
+            <button id="reloadBtn">Atnaujinti</button>
+          `;
           document.body.appendChild(toast);
+
+          document.getElementById("reloadBtn").onclick = () => {
+            newWorker.postMessage({ action: "skipWaiting" });
+          };
         }
       };
     };
