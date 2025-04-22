@@ -23,7 +23,7 @@ function filterSections() {
 }
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.querySelector("main.content").scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // SW atnaujinimo žinutė
