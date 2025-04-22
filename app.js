@@ -1,13 +1,26 @@
-const APP_VERSION = "v1.9";
+const APP_VERSION = "v2.0";
 
-// Atnaujinta DOMContentLoaded – viskas vienoje vietoje
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
   if (v) v.textContent = APP_VERSION;
 
   const backBtn = document.getElementById("backToTop");
-  if (backBtn) {
-    backBtn.addEventListener("click", scrollToTop);
+  const content = document.querySelector(".content");
+
+  if (backBtn && content) {
+    // Scroll listeneris
+    content.addEventListener("scroll", () => {
+      if (content.scrollTop > 100) {
+        backBtn.style.display = "flex";
+      } else {
+        backBtn.style.display = "none";
+      }
+    });
+
+    // Scroll to top veiksmas
+    backBtn.addEventListener("click", () => {
+      scrollToTop();
+    });
   }
 });
 
