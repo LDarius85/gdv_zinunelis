@@ -90,14 +90,22 @@ section {
 }
 #backToTop {
   position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #444;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.5); /* permatomas juodas */
   color: white;
   border: none;
-  padding: 0.4em 1em;
-  font-size: 0.9em;
-  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  line-height: 48px;
+  text-align: center;
+  border-radius: 50%;
   z-index: 999;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#backToTop:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
