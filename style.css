@@ -61,7 +61,7 @@ section {
   display: none;
   position: fixed;
   top: 5px;
-  left: 10px;
+  left: env(safe-area-inset-left, 10px);
   cursor: pointer;
   z-index: 1000;
   font-size: 24px;
