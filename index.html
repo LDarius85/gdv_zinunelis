@@ -26,14 +26,17 @@
   <script src="app.js" defer></script>
 </head>
 <body>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <header class="topbar">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   
-<button class="menu-toggle" onclick="toggleMenu()">☰</button>
-<div class="app">
-  <div class="version"></div>
-  <input type="text" id="searchBox" placeholder="Ieškoti..." oninput="filterSections()" />
-  <button id="backToTop">↑</button>
-
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="app">
+    <div class="version"></div>
+    <input type="text" id="searchBox" placeholder="Ieškoti..." oninput="filterSections()" />
+  </header>
+  
+    <button id="backToTop">↑</button>
+  
     <aside class="sidebar" id="sidebar">
       <h1>Turinys</h1>
       <ul>
