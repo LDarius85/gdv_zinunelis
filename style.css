@@ -121,14 +121,16 @@ section {
 
 #clearSearch {
   position: fixed;
-  top: 6px;
-  left: calc(50px + 250px - 1.8em); /* 50px kairėje kaip input + laukelio plotis */
+  top: 8px;
+  right: 14px;
   background: transparent;
   border: none;
   font-size: 1.2em;
   cursor: pointer;
   display: none;
   z-index: 1001;
+  padding: 0;
+  line-height: 1;
 }
 
 #backToTop {
