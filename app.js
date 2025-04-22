@@ -1,9 +1,14 @@
-const APP_VERSION = "v1.6";
+const APP_VERSION = "v1.7";
 
-// Užrašom versiją į HTML
+// Atnaujinta DOMContentLoaded – viskas vienoje vietoje
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
   if (v) v.textContent = APP_VERSION;
+
+  const backBtn = document.getElementById("backToTop");
+  if (backBtn) {
+    backBtn.addEventListener("click", scrollToTop);
+  }
 });
 
 function toggleMenu() {
@@ -24,15 +29,6 @@ function filterSections() {
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const v = document.querySelector(".version");
-  if (v) v.textContent = APP_VERSION;
-
-  const backBtn = document.getElementById("backToTop");
-  if (backBtn) {
-    backBtn.addEventListener("click", scrollToTop);
-  }
-});
 
 // Atnaujinimo pranešimas (su newWorker globaliai)
 let newWorker;
@@ -62,15 +58,11 @@ function showUpdateNotification() {
   document.getElementById("reloadBtn").onclick = () => {
     if (newWorker) {
       newWorker.postMessage({ action: "skipWaiting" });
-  
-      // Priverstinai reload'int kai SW perima kontrolę
+
+      // Perkraunam, kai naujas SW perima kontrolę
       navigator.serviceWorker.addEventListener("controllerchange", () => {
         window.location.reload();
       });
     }
   };
 }
-
-navigator.serviceWorker.addEventListener("controllerchange", () => {
-  window.location.reload();
-});
