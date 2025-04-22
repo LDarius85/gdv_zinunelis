@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.1";
+const APP_VERSION = "v2.2";
 
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
