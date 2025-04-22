@@ -6,6 +6,13 @@ html, body {
   flex-direction: column;
 }
 
+.highlight {
+  background-color: #FFC000;
+  border: 1px solid red;
+  padding: 0 2px;
+  border-radius: 5px;
+}
+
 .content {
   height: 100vh;
   overflow-y: auto;
