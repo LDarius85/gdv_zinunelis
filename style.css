@@ -111,3 +111,41 @@ section {
 #backToTop:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+#updateNotification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #323232;
+  color: #fff;
+  padding: 1em 1.5em;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  z-index: 1001;
+  font-size: 0.95em;
+  animation: slideUp 0.4s ease forwards;
+}
+
+#updateNotification button {
+  background-color: #00b894;
+  border: none;
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+}
+
+#updateNotification button:hover {
+  background-color: #019874;
+}
+
+@keyframes slideUp {
+  from { bottom: -100px; opacity: 0; }
+  to { bottom: 20px; opacity: 1; }
+}
