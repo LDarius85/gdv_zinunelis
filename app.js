@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.6";
+const APP_VERSION = "v2.7";
 
 document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
@@ -67,6 +67,16 @@ if ("serviceWorker" in navigator) {
       });
     });
   });
+
+   // 👇 Versijos spaudimas
+  const vElement = document.querySelector(".version");
+  if (vElement) {
+    vElement.style.cursor = "pointer";
+    vElement.title = "Patikrinti ar yra nauja versija";
+    vElement.addEventListener("click", () => {
+      reg.update(); // priverstinai tikrina naują versiją
+    });
+  }
 
   // Kai naujas SW perima kontrolę – perkraunam puslapį
   navigator.serviceWorker.addEventListener("controllerchange", () => {
