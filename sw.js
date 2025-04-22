@@ -1,4 +1,4 @@
-const CACHE_NAME = "v1.1";
+const CACHE_NAME = "v1.0";
 const ASSETS = [
   "index.html",
   "style.css",
@@ -24,6 +24,12 @@ self.addEventListener("activate", event => {
       )
     ).then(() => self.clients.claim())
   );
+});
+
+self.addEventListener("message", event => {
+  if (event.data.action === "skipWaiting") {
+    self.skipWaiting();
+  }
 });
 
 // Fetch handler
