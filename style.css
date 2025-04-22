@@ -107,8 +107,8 @@ section {
 
 #searchBox {
   position: fixed;
-  top: 6px;
-  left: 100px;
+  top: 10px;
+  left: 60px;
   width: 75%;
   max-width: 250px;
   padding: 5px 12px;
