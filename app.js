@@ -1,13 +1,10 @@
-const APP_VERSION = "v1.1";
+const APP_VERSION = "v1.3";
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").then(
-      () => console.log("SW registered"),
-      err => console.log("SW registration failed", err)
-    );
-  });
-}
+// Užrašom versiją į HTML
+document.addEventListener("DOMContentLoaded", () => {
+  const v = document.querySelector(".version");
+  if (v) v.textContent = APP_VERSION;
+});
 
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("active");
@@ -28,32 +25,34 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// SW atnaujinimo žinutė
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(reg => {
-    reg.onupdatefound = () => {
-      const newWorker = reg.installing;
-      newWorker.onstatechange = () => {
-        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-          const toast = document.createElement("div");
-          toast.id = "updateNotification";
-          toast.innerHTML = `
-            <span>Yra nauja versija</span>
-            <button id="reloadBtn">Atnaujinti</button>
-          `;
-          document.body.appendChild(toast);
+// Atnaujinimo pranešimas (su newWorker globaliai)
+let newWorker;
 
-          document.getElementById("reloadBtn").onclick = () => {
-            newWorker.postMessage({ action: "skipWaiting" });
-          };
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").then(reg => {
+    reg.onupdatefound = () => {
+      newWorker = reg.installing;
+      newWorker.onstatechange = () => {
+        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+          showUpdateNotification();
         }
       };
     };
   });
 }
 
-// Įrašom versiją į .version div
-document.addEventListener("DOMContentLoaded", () => {
-  const v = document.querySelector(".version");
-  if (v) v.textContent = APP_VERSION;
-});
+function showUpdateNotification() {
+  const toast = document.createElement("div");
+  toast.id = "updateNotification";
+  toast.innerHTML = `
+    <span>Yra nauja versija</span>
+    <button id="reloadBtn">Atnaujinti</button>
+  `;
+  document.body.appendChild(toast);
+
+  document.getElementById("reloadBtn").onclick = () => {
+    if (newWorker) {
+      newWorker.postMessage({ action: "skipWaiting" });
+    }
+  };
+}
