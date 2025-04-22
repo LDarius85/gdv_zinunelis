@@ -46,6 +46,7 @@ function toggleMenu() {
 function closeMenu() {
   document.getElementById("sidebar").classList.remove("active");
 }
+
 //Paieškos funkcija su paryškintais žodžiais
 function filterSections() {
   const input = document.getElementById("searchBox");
@@ -71,6 +72,19 @@ function filterSections() {
       section.innerHTML = section.innerHTML.replace(regex, '<span class="highlight">$1</span>');
     }
   });
+}
+//Paieškos laukelio trynimas
+function clearSearch() {
+  const input = document.getElementById("searchBox");
+  input.value = "";
+  filterSections();
+  toggleClearButton(); // paslėpsim mygtuką
+}
+//susije su paieška
+function toggleClearButton() {
+  const input = document.getElementById("searchBox");
+  const clearBtn = document.getElementById("clearSearch");
+  clearBtn.style.display = input.value ? "inline" : "none";
 }
 
 // 🔄 Service Worker – atnaujinimų aptikimas
