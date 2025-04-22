@@ -1,1 +1,1 @@
-# gdv_zinunelis
+# gdv_zininelis
