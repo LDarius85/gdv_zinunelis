@@ -133,6 +133,10 @@ section {
   line-height: 1;
 }
 
+#clearSearch:hover svg {
+  fill: #000; /* arba tavo akcentinė spalva */
+}
+
 #backToTop {
   display: none;
   display: flex;
