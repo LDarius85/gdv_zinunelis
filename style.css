@@ -1,8 +1,14 @@
-#backToTop {
-  display: block !important;
-  background: red !important;
-  opacity: 1 !important;
-  z-index: 9999 !important;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  height: 100vh;
+  overflow-y: auto;
 }
 
 body {
