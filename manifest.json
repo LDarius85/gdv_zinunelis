@@ -1,6 +1,6 @@
 {
-  "name": "Knygutės skaityklė",
-  "short_name": "Knygutė",
+  "name": "GDV žinynėlis",
+  "short_name": "Žinynėlis",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
