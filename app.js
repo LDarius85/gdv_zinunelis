@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const v = document.querySelector(".version");
   if (v) v.textContent = APP_VERSION;
 
+  const menuBtn = document.getElementById("menuButton");
+  if (menuBtn) {
+    menuBtn.addEventListener("click", toggleMenu);
+  }
+
   const backBtn = document.getElementById("backToTop");
   const content = document.querySelector(".content");
 
