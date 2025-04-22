@@ -119,7 +119,7 @@ section {
 }
 
 #backToTop {
-  display: flex !important;
+  display: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -136,6 +136,10 @@ section {
   z-index: 999;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
+}
+
+#backToTop.show {
+  display: flex;
 }
 
 #backToTop:hover {
