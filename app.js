@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.5";
+const APP_VERSION = "v1.6";
 
 // Užrašom versiją į HTML
 document.addEventListener("DOMContentLoaded", () => {
@@ -62,6 +62,11 @@ function showUpdateNotification() {
   document.getElementById("reloadBtn").onclick = () => {
     if (newWorker) {
       newWorker.postMessage({ action: "skipWaiting" });
+  
+      // Priverstinai reload'int kai SW perima kontrolę
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        window.location.reload();
+      });
     }
   };
 }
