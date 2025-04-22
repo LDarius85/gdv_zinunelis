@@ -11,6 +11,13 @@ self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    clients.claim() // <- priverčia naują SW perimt kontrolę
+  );
 });
 
 self.addEventListener("fetch", event => {
