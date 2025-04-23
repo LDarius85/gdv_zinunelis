@@ -67,10 +67,19 @@ function filterSections() {
 
     section.style.display = shouldShow ? "block" : "none";
 
-    if (filter && shouldShow) {
-      const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
-      section.innerHTML = section.innerHTML.replace(regex, '<span class="highlight">$1</span>');
-    }
+    //if (filter && shouldShow) {
+    //  const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
+    //  section.innerHTML = section.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+    //}
+	if (filter && shouldShow) {
+	  const regex = new RegExp(`(${filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
+
+	  // Saugom <img> žymas
+	  section.innerHTML = section.innerHTML
+		.replace(/<img[^>]*>/g, match => `[[[IMG:${btoa(match)}]]]`) // Kodavimas į saugią formą
+		.replace(regex, '<span class="highlight">$1</span>') // Pažymim tekstą
+		.replace(/\[\[\[IMG:(.*?)\]\]\]/g, (m, code) => atob(code)); // Grąžinam atgal <img>
+	}
   });
 }
 //Paieškos laukelio trynimas
