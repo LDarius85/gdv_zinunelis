@@ -234,3 +234,29 @@ section {
 section {
   scroll-margin-top: 48px;
 }
+
+/*Lentelė*/
+table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+
+    th {
+      background-color: rgba(255, 192, 0, 0.3);
+      font-weight: bold;
+    }
+
+    td:first-child {
+      text-align: left;
+    }
+
+    td:nth-child(2) {
+      text-align: center;
+    }
+
+/*Lentelė*/
