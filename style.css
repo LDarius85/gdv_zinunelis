@@ -258,5 +258,9 @@ table {
     td:nth-child(2) {
       text-align: center;
     }
+	
+	td:nth-child(3) {
+      text-align: center;
+    }
 
 /*Lentelė*/
