@@ -270,3 +270,7 @@ hr + p {
   margin-top: 2px;
   margin-bottom: 2px;
 }
+
+table hr {
+  margin: 2px 0;
+}
