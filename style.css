@@ -111,8 +111,8 @@ section {
   position: fixed;
   top: 8px;
   right: 8px;
-  width: 75%;
-  max-width: 250px;
+  width: 70%;
+  /*max-width: 250px;*/
   padding: 5px 12px;
   padding-right: 2em;
   font-size: 1rem;
